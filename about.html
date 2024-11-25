@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <div class="logo">Food <b style="color: #06C167;">Donate</b></div>
+        <div class="logo"><b style="color: #06C167;">SustainBite</b></div>
         <div class="hamburger">
             <div class="line"></div>
             <div class="line"></div>
@@ -31,9 +31,53 @@
             navBar.classList.toggle("active");
         }
     </script>
+     
+     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+
     <style>
-       
-        
+      
+     
+    /* Fade-in effect */
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    /* General text style */
+    .sparkle-text {
+        font-family: 'Poppins', sans-serif;
+        font-size: 50px;
+        font-weight: 700;
+        text-align: center;
+        margin-top: 100px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: black; /* "Welcome to" will be black */
+        animation: fadeIn 2s ease-in-out;
+    }
+
+    .food {
+        font-size: 56px;
+        background: linear-gradient(135deg, #06C167, #000000);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+    }
+
+    .donate {
+        font-size: 56px;
+        background: linear-gradient(135deg, #06C167, #000000);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+    }
+
+    
+    
         .coverc{
           width: 100%;
           height: 400px;
@@ -93,7 +137,10 @@
         
     
     </section> -->
-    <p class="title">"Welcome to <u> Food Donate</u> "</p>
+
+   
+    <p class="sparkle-text">Welcome to <span class="food"></span> <span class="donate">SustainBite</span></p>
+
     <br>
     <br>
     <br>
@@ -104,7 +151,16 @@
       <div class="para">
         <!-- <p>"Welcome to Food Donate, India's largest and most trusted donating platform that connects donors to verified nonprofits. FoodDonate helps you become a ray of hope for people in need. Choose a cause that is close to your heart and join hands with millions of donors like you who aim to make this world a better place."</p> -->
       
-        <p>We are a team of passionate individuals committed to addressing the issue of food waste in India. Our goal is to create a system that connects food donors with charities and NGOs, while also reducing the environmental impact of food waste.</p>
+        <p> At SustainBite, we believe in making a difference by providing a simple yet impactful way for individuals and organizations to share their surplus food with those in need. Our mission is to reduce food waste while helping those who are less fortunate by providing them with nutritious meals.</p>
+      </br>
+        <p>We connect donors—whether they are individuals, restaurants, or food establishments—with recipients, including shelters, food banks, and people in need. Through our easy-to-use platform, you can donate food quickly and efficiently, knowing it will reach those who need it the most.</p>
+
+    </br>
+    <p class="heading">Our Vision</p>
+    <p>Our vision is to create a world where food waste is minimized, and no one goes to bed hungry. We aim to create a sustainable food-sharing community that works together to provide meals to those in need, without contributing to further waste. By joining us, you're not only helping reduce food wastage but also making a lasting impact on communities everywhere.</p>
+       
+    
+
       </div>
       <br>
  
@@ -127,5 +183,10 @@
      <!-- <div class="overview"  style="  text-align: center; padding-bottom: 50px;" >
       <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=1400 height=800 src="https://edrawcloudpublicus.s3.amazonaws.com/viewer/self/3094230/share/2023-3-2/1677763924/main.svg" id="overview"></iframe>
      </div> -->
+
+
+     <footer>
+      <p>&copy; 2024 SustainBite| All Rights Reserved</p>
+  </footer>
 </body>
 </html>

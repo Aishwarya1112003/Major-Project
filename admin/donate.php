@@ -27,7 +27,7 @@ if($_SESSION['name']==''){
     
 <?php
  $connection=mysqli_connect("localhost","root","Ram1234*");
- $db=mysqli_select_db($connection,'foodwaste_db');
+ $db=mysqli_select_db($connection,'fooddonation');
  
 
 
@@ -53,9 +53,9 @@ if($_SESSION['name']==''){
                     <i class="uil uil-files-landscapes"></i>
                     <span class="link-name">Content</span>
                 </a></li> -->
-                <li><a href="analytics.php">
-                    <i class="uil uil-chart"></i>
-                    <span class="link-name">Analytics</span>
+                <!--<li><a href="analytics.php"> -->
+                    <!-- <i class="uil uil-chart"></i> -->
+                    <!-- <span class="link-name">Analytics</span> -->
                 </a></li>
                 <li><a href="#">
                     <i class="uil uil-heart"></i>
@@ -67,7 +67,7 @@ if($_SESSION['name']==''){
                 </a></li>
                 <li><a href="adminprofile.php">
                     <i class="uil uil-user"></i>
-                    <span class="link-name">Profile</span>
+                    <span class="link-name">History</span>
                 </a></li>
                 <!-- <li><a href="#">
                     <i class="uil uil-share"></i>
@@ -100,7 +100,7 @@ if($_SESSION['name']==''){
         <div class="top">
             <i class="uil uil-bars sidebar-toggle"></i>
             <!-- <p>Food Donate</p> -->
-            <p  class ="logo" >Food <b style="color: #06C167; ">Donate</b></p>
+            <p  class ="logo" ><b style="color: #06C167; ">SustainBite</b></p>
              <p class="user"></p>
             <!-- <div class="search-box">
                 <i class="uil uil-search"></i>
@@ -123,6 +123,7 @@ if($_SESSION['name']==''){
              <label for="location" class="logo">Select Location:</label>
              <!-- <br> -->
             <select id="location" name="location">
+            <option value="" selected disabled>Select a location</option>
             <option value="santacruz">Santacruz</option>
             <option value="vileparle">Vileparle</option>
             <option value="andheri">Andheri</option>

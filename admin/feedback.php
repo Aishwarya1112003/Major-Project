@@ -27,7 +27,7 @@ if($_SESSION['name']==''){
     
 <?php
  $connection=mysqli_connect("localhost","root","Ram1234*");
- $db=mysqli_select_db($connection,'foodwaste_db');
+ $db=mysqli_select_db($connection,'fooddonation');
  
 
 
@@ -53,9 +53,9 @@ if($_SESSION['name']==''){
                     <i class="uil uil-files-landscapes"></i>
                     <span class="link-name">Content</span>
                 </a></li> -->
-                <li><a href="analytics.php">
+                <!-- <li><a href="analytics.php">
                     <i class="uil uil-chart"></i>
-                    <span class="link-name">Analytics</span>
+                    <span class="link-name">Analytics</span> -->
                 </a></li>
                 <li><a href="donate.php">
                     <i class="uil uil-heart"></i>
@@ -67,7 +67,7 @@ if($_SESSION['name']==''){
                 </a></li>
                 <li><a href="adminprofile.php">
                     <i class="uil uil-user"></i>
-                    <span class="link-name">Profile</span>
+                    <span class="link-name">History</span>
                 </a></li>
                 <!-- <li><a href="#">
                     <i class="uil uil-share"></i>

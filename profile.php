@@ -26,7 +26,7 @@ if($_SESSION['name']==''){
 </head>
 <body>
 <header>
-        <div class="logo">Food <b style="color: #06C167;">Donate</b></div>
+<div class="logo"><b style="color: #06C167;">SustainBite</b></div>
         <div class="hamburger">
             <div class="line"></div>
             <div class="line"></div>

@@ -49,6 +49,7 @@ $id=$_SESSION['Did'];
                 <li><a href="#home" class="active">Home</a></li>
                 <li><a href="openmap.php" >map</a></li>
                 <li><a href="deliverymyord.php" >myorders</a></li>
+                <li><a href="logout.php">Log out</a></li>
                 <!-- <li ><a href="../logout.php"  >Logout</a></li> -->
             </ul>
         </nav>
@@ -165,6 +166,7 @@ if (isset($_POST['food']) && isset($_POST['delivery_person_id'])) {
 <div class="log">
 <!-- <button type="submit" name="food" onclick="">My orders</button> -->
 <a href="deliverymyord.php">My orders</a>
+
 
 </div>
   

@@ -6,7 +6,7 @@ if($_SESSION['name']==''){
 // include("login.php"); 
 $emailid= $_SESSION['email'];
 $connection=mysqli_connect("localhost","root","Ram1234*");
-$db=mysqli_select_db($connection,'foodwaste_db');
+$db=mysqli_select_db($connection,'fooddonation');
 if(isset($_POST['submit']))
 {
     $foodname=mysqli_real_escape_string($connection, $_POST['foodname']);
@@ -45,14 +45,14 @@ if(isset($_POST['submit']))
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Donate</title>
+    <title>SustainBite</title>
     <link rel="stylesheet" href="loginstyle.css">
 </head>
 <body style="    background-color: #06C167;">
     <div class="container">
         <div class="regformf" >
     <form action="" method="post">
-        <p class="logo">Food <b style="color: #06C167; ">Donate</b></p>
+    <p class="logo"><b style="color: #06C167; ">SustainBite</b></p>
         
        <div class="input">
         <label for="foodname"  > Food Name:</label>
@@ -92,7 +92,7 @@ if(isset($_POST['submit']))
         <!-- <input type="text" id="food" name="food"> -->
         </div>
         <div class="input">
-        <label for="quantity">Quantity:(number of person /kg)</label>
+        <label for="quantity">Quantity:(no. of persons/ no. of kg)</label>
         <input type="text" id="quantity" name="quantity" required/>
         </div>
        <b><p style="text-align: center;">Contact Details</p></b>
@@ -115,6 +115,7 @@ if(isset($_POST['submit']))
         <label for="location"></label>
         <label for="district">Place:</label>
 <select id="district" name="district" style="padding:10px;">
+<option value="" selected disabled>Select a location</option>
   <option value="santacruz">Santacruz</option>
   <option value="vileparle">Vileparle</option>
   <option value="andheri">Andheri</option>
@@ -124,16 +125,17 @@ if(isset($_POST['submit']))
   <option value="dadar">Dadar</option>
 
 </select> 
+<div>
+  <label for="address" style="padding-left: 0px;">Address:</label>
+  <input type="text" id="address" name="address" required/><br>
 
-        <label for="address" style="padding-left: 10px;">Address:</label>
-        <input type="text" id="address" name="address" required/><br>
-        
-      
-       
-       
-        </div>
+  </div>        
+
+
+ 
+        </div>   
         <div class="btn">
-            <button type="submit" name="submit"> submit</button>
+            <button type="submit" name="submit"> Submit</button>
      
         </div>
      </form>

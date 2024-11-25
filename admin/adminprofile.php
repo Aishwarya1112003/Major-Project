@@ -31,15 +31,15 @@ if($_SESSION['name']==''){
             <ul class="nav-links">
                 <li><a href="admin.php">
                     <i class="uil uil-estate"></i>
-                    <span class="link-name">Dahsboard</span>
+                    <span class="link-name">Dashboard</span>
                 </a></li>
                 <!-- <li><a href="#">
                     <i class="uil uil-files-landscapes"></i>
                     <span class="link-name">Content</span>
                 </a></li> -->
-                <li><a href="analytics.php">
+                <!-- <li><a href="analytics.php">
                     <i class="uil uil-chart"></i>
-                    <span class="link-name">Analytics</span>
+                    <span class="link-name">Analytics</span> -->
                 </a></li>
                 <li><a href="donate.php">
                     <i class="uil uil-heart"></i>
@@ -51,7 +51,7 @@ if($_SESSION['name']==''){
                 </a></li>
                 <li><a href="#">
                     <i class="uil uil-user"></i>
-                    <span class="link-name">Profile</span>
+                    <span class="link-name">History</span>
                 </a></li>
                 <!-- <li><a href="#">
                     <i class="uil uil-share"></i>

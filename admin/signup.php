@@ -74,7 +74,7 @@ if(isset($_POST['sign']))
             <br>
             <div class="input-group">
                 <label for="username">Name</label>
-                <input type="text" id="username" name="username" required/>
+                <input type="text" id="username" name="username" maxlength="20" required/>
                 <div class="error"></div>
             </div>
             <div class="input-group">
@@ -91,7 +91,7 @@ if(isset($_POST['sign']))
             <label class="textlabel" for="password">Password</label> 
              <div class="password">
               
-                <input type="password" name="password" id="password"  required/>
+                <input type="password" name="password" id="password" maxlength="8" required/>
                 <!-- <i class="fa fa-eye-slash" aria-hidden="true" id="showpassword"></i> -->
                 <!-- <i class="bi bi-eye-slash" id="showpassword"></i>  -->
                 <!-- <i class="uil uil-lock icon"></i> -->
@@ -110,7 +110,7 @@ if(isset($_POST['sign']))
             </div> -->
             <div class="input-group">
                     <label for="address">Address</label>
-                    <textarea id="address" name="address" id="address" required/></textarea>
+                    <textarea id="address" name="address" id="address" maxlength="50" required/></textarea>
      
                 <!-- <input type="text" id="address" name="address" required/> -->
                         
@@ -119,6 +119,7 @@ if(isset($_POST['sign']))
                         <!-- <label for="district">Location:</label> -->
                         <!-- <br> -->
                         <select id="district" name="district" style="padding:10px; padding-left: 20px;">
+                          <option value="" selected disabled>Select a location</option> 
                           <option value="santacruz">Santacruz</option>
                           <option value="vileparle">Vileparle</option>
                           <option value="andheri">Andheri</option>

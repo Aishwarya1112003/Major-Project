@@ -36,7 +36,7 @@ $id=$_SESSION['Did'];
                 <li><a href="delivery.php" >Home</a></li>
                 <li><a href="openmap.php" >map</a></li>
                 <li><a href="deliverymyord.php"  class="active">myorders</a></li>
-    
+                <li ><a href="logout.php"  >Log out</a></li>
             </ul>
         </nav>
     </header>

@@ -64,14 +64,14 @@ if(isset($_POST['sign']))
     <div class="regform">
        
         <form action=" " method="post">
-            <p class="logo">Food <b style="color: #06C167;">Donate</b></p>
+        <p class="logo"><b style="color: #06C167;">SustainBite</b></p>
             
             <p id="heading">Create your account</p>
             
             <div class="input">
                 <label class="textlabel" for="name">User name</label><br>
                 
-                <input type="text" id="name" name="name" required/>
+                <input type="text" id="name" name="name" maxlength="20" required/>
              </div>
              <div class="input">
                 <label class="textlabel" for="email">Email</label>
@@ -90,7 +90,7 @@ if(isset($_POST['sign']))
              <label class="textlabel" for="password">Password</label>
              <div class="password">
               
-                <input type="password" name="password" id="password" required/>
+             <input type="password" name="password" id="password" maxlength="8" required/>
                 <!-- <i class="fa fa-eye-slash" aria-hidden="true" id="showpassword"></i> -->
                 <!-- <i class="bi bi-eye-slash" id="showpassword"></i>  -->
                 <!-- <i class="uil uil-lock icon"></i> -->
@@ -100,10 +100,10 @@ if(isset($_POST['sign']))
     
              <div class="radio">
                 
-                <input type="radio" name="gender" id="male" value="male" required/>
-                <label for="male" >Male</label>
-                <input type="radio" name="gender" id="female" value="female">
-                <label for="female" >Female</label>
+                <input type="radio" name="gender" id="Male" value="Male" required/>
+                <label for="Male" >Male</label>
+                <input type="radio" name="gender" id="Female" value="Female">
+                <label for="Female" >Female</label>
 
              </div>
              <div class="btn">

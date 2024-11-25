@@ -54,7 +54,7 @@
                 <li><a href="delivery.php">Home</a></li>
                 <li><a href="#" class="active">map</a></li>
                 <li><a href="deliverymyord.php" >myorders</a></li>
-                <!-- <li ><a href="fooddonate.html"  >Donate</a></li> -->
+                <li ><a href="logout.php"  >Log out</a></li>
             </ul>
         </nav>
     </header>
