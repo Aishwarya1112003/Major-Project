@@ -10,9 +10,26 @@ $name = $_SESSION['name'];
 $city = $_SESSION['city'];
 $id = $_SESSION['Did'];
 
+// if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['view_map'])) {
+//     $pickup_address = $_GET['pickup_address'] ?? 'Pickup address not found';
+//     $delivery_address = $_GET['delivery_address'] ?? 'Delivery address not found';
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['view_map'])) {
     $pickup_address = $_GET['pickup_address'] ?? 'Pickup address not found';
     $delivery_address = $_GET['delivery_address'] ?? 'Delivery address not found';
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['view_map'])) {
+    $pickup_address = $_GET['pickup_address'] ?? 'Pickup address not found';
+    $delivery_address = $_GET['delivery_address'] ?? 'Delivery address not found';
+    $order_id = $_GET['order_id'] ?? null; // Retrieve order ID from the request
+
+    // Update the delivery_by field in the database
+    if ($order_id) {
+        $sql_update = "UPDATE food_donations SET delivery_by = '$id' WHERE Fid = '$order_id'";
+        if (!mysqli_query($connection, $sql_update)) {
+            echo "<p style='color: red; text-align: center;'>Failed to update the order status. Please try again.</p>";
+        }
+    }
+
 
     function getCoordinates($address)
     {
@@ -45,6 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['view_map'])) {
     $pickup_coords = getCoordinates($pickup_address);
     $delivery_coords = getCoordinates($delivery_address);
 }
+}
 ?>
 
 <!DOCTYPE html>
@@ -64,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['view_map'])) {
 
 <body>
     <header>
-        <div class="logo">Food <b style="color: #06C167;">Donate</b></div>
+        <div class="logo">Sustain <b style="color: #06C167;">Bite</b></div>
         <nav class="nav-bar">
             <ul>
                 <li><a href="#home" class="active">Home</a></li>
