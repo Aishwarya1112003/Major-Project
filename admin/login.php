@@ -1,6 +1,6 @@
  <?php
-$connection=mysqli_connect("localhost:3307","root","Ram1234*");
-$db=mysqli_select_db($connection,'foodwaste_db');
+$connection=mysqli_connect("localhost:3307","root","");
+$db=mysqli_select_db($connection,'food_donate');
 include '../connection.php';
 $acc=0;
 $msg=0;

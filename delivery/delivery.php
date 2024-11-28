@@ -110,11 +110,30 @@ $id=$_SESSION['Did'];
             <?php
 
 
-// Define the SQL query to fetch unassigned orders
-$sql = "SELECT fd.Fid AS Fid,fd.location as cure, fd.name,fd.phoneno,fd.date,fd.delivery_by, fd.address as From_address, 
-ad.name AS delivery_person_name, ad.address AS To_address
-FROM food_donations fd
-LEFT JOIN admin ad ON fd.assigned_to = ad.Aid where assigned_to IS NOT NULL and delivery_by IS NULL";
+// // Define the SQL query to fetch unassigned orders
+// $sql = "SELECT fd.Fid AS Fid,fd.location as cure, fd.name,fd.phoneno,fd.date,fd.delivery_by, fd.address as From_address, 
+// ad.name AS delivery_person_name, ad.address AS To_address
+// FROM food_donations fd
+// LEFT JOIN admin ad ON fd.assigned_to = ad.Aid where assigned_to IS NOT NULL and delivery_by IS NULL";
+
+$sql = "SELECT 
+        fd.Fid AS Fid,
+        fd.location AS cure,
+        fd.name,
+        fd.phoneno,
+        fd.date,
+        fd.delivery_by,
+        fd.address AS From_address, 
+        ad.name AS delivery_person_name, 
+        ad.address AS To_address
+    FROM 
+        food_donations fd
+    LEFT JOIN 
+        admin ad 
+    ON 
+        fd.assigned_to = ad.Aid
+    WHERE 
+        assigned_to IS NOT NULL AND delivery_by IS NULL";
 
 // Execute the query
 $result=mysqli_query($connection, $sql);
@@ -202,11 +221,15 @@ if (isset($_POST['food']) && isset($_POST['delivery_person_id'])) {
             <td><?= $row['address'] ?></td> -->
             <td data-label="Action" style="margin:auto">
                 <?php if ($row['delivery_by'] == null) { ?>
-                    <form method="post" action=" ">
-                        <input type="hidden" name="order_id" value="<?= $row['Fid'] ?>">
-                        <input type="hidden" name="delivery_person_id" value="<?= $id ?>">
-                        <button type="submit" name="food">Take order</button>
+
+					<form method="get" action="view_map.php">
+                       <input type="hidden" name="order_id" value="<?= $row['Fid'] ?>">
+			           <input type="hidden" name="delivery_person_id" value="<?= $id ?>">
+			           <input type="hidden" name="pickup_address" value="<?= htmlspecialchars($row['From_address']) ?>">
+                       <input type="hidden" name="delivery_address" value="<?= htmlspecialchars($row['To_address']) ?>">           
+                       <button type="submit" name="view_map">Take Order</button>
                     </form>
+                    
                 <?php } else if ($row['delivery_by'] == $id) { ?>
                     Order assigned to you
                 <?php } else { ?>
