@@ -1,6 +1,6 @@
  <?php
-$connection=mysqli_connect("localhost:3307","root","Ram1234*");
-$db=mysqli_select_db($connection,'foodwaste_db');
+$connection=mysqli_connect("localhost:3307","root","");
+$db=mysqli_select_db($connection,'food_donate');
 include '../connection.php';
 $acc=0;
 $msg=0;
@@ -25,7 +25,7 @@ if (isset($_POST['Login'])) {
                 $_SESSION['address'] = $row['address']; // Add the address to session
 
                 // Redirect to admin dashboard
-                header("location:admin.php");
+                header("location:delivery.php");
                 exit();
             } else {
                 $msg = 1; // Incorrect password
@@ -214,7 +214,7 @@ if (isset($_POST['Login'])) {
         $_SESSION['email'] = $email;
         $_SESSION['name'] = $row['name'];
         $_SESSION['location'] = $row['location'];
-        header("location:admin.php");
+        header("location:deilvery.php");
       } else {
         $msg=1;
         // echo "<h1><center> Login Failed incorrect password</center></h1>";

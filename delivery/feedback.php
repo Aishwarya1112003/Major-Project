@@ -45,7 +45,7 @@ if($_SESSION['name']==''){
 
         <div class="menu-items">
             <ul class="nav-links">
-                <li><a href="admin.php">
+                <li><a href="delivery.php">
                     <i class="uil uil-estate"></i>
                     <span class="link-name">Dahsboard</span>
                 </a></li>
@@ -56,10 +56,10 @@ if($_SESSION['name']==''){
                 <!-- <li><a href="analytics.php">
                     <i class="uil uil-chart"></i>
                     <span class="link-name">Analytics</span> -->
-                </a></li>
+                <!-- </a></li>
                 <li><a href="donate.php">
                     <i class="uil uil-heart"></i>
-                    <span class="link-name">Donates</span>
+                    <span class="link-name">Donates</span> -->
                 </a></li>
                 <li><a href="#">
                     <i class="uil uil-comments"></i>

@@ -8,6 +8,7 @@ if($_SESSION['name']==''){
 	header("location:signin.php");
 }
 ?>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -26,8 +27,8 @@ if($_SESSION['name']==''){
     <title>Admin Dashboard Panel</title> 
     
 <?php
- $connection=mysqli_connect("localhost","root","");
- $db=mysqli_select_db($connection,'food_donate');
+ $connection=mysqli_connect("localhost","root","Ram1234*");
+ $db=mysqli_select_db($connection,'fooddonation');
  
 
 
@@ -40,7 +41,7 @@ if($_SESSION['name']==''){
                 <!--<img src="images/logo.png" alt="">-->
             </div>
 
-            <span class="logo_name">ADMIN</span>
+            <span class="logo_name"></span>
         </div>
 
         <div class="menu-items">
@@ -61,7 +62,7 @@ if($_SESSION['name']==''){
                     <i class="uil uil-heart"></i>
                     <span class="link-name">Donates</span>
                 </a></li>
-                <li><a href="feedback.php">
+                <!--<li><a href="feedback.php">
                     <i class="uil uil-comments"></i>
                     <span class="link-name">Feedbacks</span>
                 </a></li>
@@ -69,7 +70,7 @@ if($_SESSION['name']==''){
                     <i class="uil uil-user"></i>
                     <span class="link-name">History</span>
                 </a></li>
-                <!-- <li><a href="#">
+                    <li><a href="#">
                     <i class="uil uil-share"></i>
                     <span class="link-name">Share</span>
                 </a></li> -->
@@ -120,17 +121,12 @@ if($_SESSION['name']==''){
             <div class="location">
                 <!-- <p class="logo">Filter by Location</p> -->
           <form method="post">
-             <label for="location" class="logo">Select Location:</label>
+             <label for="location" class="logo">Select a donor:</label>
              <!-- <br> -->
-            <select id="location" name="location">
-            <option value="" selected disabled>Select a location</option>
-            <option value="santacruz">Santacruz</option>
-            <option value="vileparle">Vileparle</option>
-            <option value="andheri">Andheri</option>
-            <option value="khar">Khar</option>
-            <option value="bandra">Bandra</option>
-            <option value="mahim">Mahim</option>
-            <option value="dadar">Dadar</option>
+             <input type="email" id="location" name="email" placeholder="Enter an email" required />
+
+            
+
         
             </select>
                 <input type="submit" value="Get Details">
@@ -138,47 +134,65 @@ if($_SESSION['name']==''){
          <br>
 
          <?php
-    // Get the selected location from the form
-    if(isset($_POST['location'])) {
-      $location = $_POST['location'];
-      
-      // Query the database for people in the selected location
-      $sql = "SELECT * FROM food_donations WHERE location='$location'";
-      $result=mysqli_query($connection, $sql);
-    //   $result = $conn->query($sql);
-      
-      // If there are results, display them in a table
-      if ($result->num_rows > 0) {
-        // echo "<h2>Food Donate in $location:</h2>";
-        
-        echo" <div class=\"table-container\">";
-        echo "    <div class=\"table-wrapper\">";
-        echo "  <table class=\"table\">";
-        echo "<table><thead>";
-        echo" <tr>
-        <th >Name</th>
-        <th>food</th>
-        <th>Category</th>
-        <th>phoneno</th>
-        <th>date/time</th>
-        <th>address</th>
-        <th>Quantity</th>
-        
-    </tr>
-    </thead><tbody>";
+    // Get the selected email from the form
+    if(isset($_POST['email'])) {
+      $email = $_POST['email'];
+      // Query the database for people in the selected email
 
-        while($row = $result->fetch_assoc()) {
-            echo "<tr><td data-label=\"name\">".$row['name']."</td><td data-label=\"food\">".$row['food']."</td><td data-label=\"category\">".$row['category']."</td><td data-label=\"phoneno\">".$row['phoneno']."</td><td data-label=\"date\">".$row['date']."</td><td data-label=\"Address\">".$row['address']."</td><td data-label=\"quantity\">".$row['quantity']."</td></tr>";
+       $sql = "SELECT * FROM food_donations WHERE email='$email'";
+    $result = mysqli_query($connection, $sql);
 
-        //   echo "<tr><td>" . $row["name"] . "</td><td>" . $row["phoneno"] . "</td><td>" . $row["location"] . "</td></tr>";
+    // Check if the query was successful
+    if ($result) {
+        // Check if there are any rows
+        if (mysqli_num_rows($result) > 0) {
+            // Start the table HTML structure
+            echo "<div class=\"table-container\">";
+            echo "    <div class=\"table-wrapper\">";
+            echo "        <table class=\"table\">";
+            echo "            <thead>";
+            echo "                <tr>
+                                    <th>Name</th>
+                                    <th>Food</th>
+                                    <th>Category</th>
+                                    <th>Phone No</th>
+                                    <th>Date/Time</th>
+                                    <th>Address</th>
+                                    <th>Quantity</th>
+                                    <th>Status</th>
+                                </tr>";
+            echo "            </thead>";
+            echo "            <tbody>";
+
+            // Fetch and display rows
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<tr>
+                        <td data-label=\"Name\">" . htmlspecialchars($row['name']) . "</td>
+                        <td data-label=\"Food\">" . htmlspecialchars($row['food']) . "</td>
+                        <td data-label=\"Category\">" . htmlspecialchars($row['category']) . "</td>
+                        <td data-label=\"Phone No\">" . htmlspecialchars($row['phoneno']) . "</td>
+                        <td data-label=\"Date/Time\">" . htmlspecialchars($row['date']) . "</td>
+                        <td data-label=\"Address\">" . htmlspecialchars($row['address']) . "</td>
+                        <td data-label=\"Quantity\">" . htmlspecialchars($row['quantity']) . "</td>
+                        <td data-label=\"Status\">" . htmlspecialchars($row['donation_status']) . "</td>
+                      </tr>";
+            }
+
+            // End the table
+            echo "            </tbody>";
+            echo "        </table>";
+            echo "    </div>";
+            echo "</div>";
+        } else {
+            // No rows found
+            echo "<p>No results found.</p>";
         }
-        echo "</tbody></table></div>";
-      } else {
-        echo "<p>No results found.</p>";
-      }
-      
-   
+    } else {
+        // Query error
+        echo "<p>Error executing query: " . mysqli_error($connection) . "</p>";
     }
+}
+
   ?>
  </div>
 

@@ -1,143 +1,194 @@
+
 <?php
-ob_start(); 
-// $connection = mysqli_connect("localhost:3307", "root", "");
-// $db = mysqli_select_db($connection, 'demo');
+ob_start();
+// session_start(); // Make sure the session is started
 include("connect.php"); 
-include '../connection.php';
-if($_SESSION['name']==''){
-	header("location:deliverylogin.php");
+
+// Check if the admin is logged in
+if ($_SESSION['name'] == '') {
+    header("location:signin.php");
+    exit();
 }
-$name=$_SESSION['name'];
-$city=$_SESSION['city'];
-$ch=curl_init();
-curl_setopt($ch,CURLOPT_URL,"http://ip-api.com/json");
-curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
-$result=curl_exec($ch);
-$result=json_decode($result);
-// $city= $result->city;
-// echo $city;
 
-$id=$_SESSION['Did'];
+// session_start();
 
+// Fetch admin details from session
+$admin_email = $_SESSION['email'];  // Email is stored in session
+$admin_name = $_SESSION['name'];  // Admin name is also stored in session
 
+// Database connection
+$connection = mysqli_connect("localhost", "root", "Ram1234*");
+$db = mysqli_select_db($connection, 'fooddonation');
+
+// Query to fetch the delivery address using the admin's email
+$delivery_address = "";
+$query = "SELECT address FROM admin WHERE email = '$admin_email'"; // Replace 'delivery_table' with your table name
+$result = mysqli_query($connection, $query);
+if ($result && mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_assoc($result);
+    $delivery_address = $row['address'];
+}
 
 ?>
-
-
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>
-    <link rel="stylesheet" href="../home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <!----======== CSS ======== -->
+    <link rel="stylesheet" href="admin.css">
+     
+    <!----===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 
-    <link rel="stylesheet" href="delivery.css">
+    <title>Admin Dashboard Panel</title> 
+    
+<?php
+ $connection=mysqli_connect("localhost","root","Ram1234*");
+ $db=mysqli_select_db($connection,'fooddonation');
+ 
+
+
+?>
 </head>
 <body>
-<header>
-        <div class="logo">Sustain <b style="color: #06C167;">Bite</b></div>
-        <div class="hamburger">
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
+    <nav>
+        <div class="logo-name">
+            <div class="logo-image">
+                <!--<img src="images/logo.png" alt="">-->
+            </div>
+
+            <span class="logo_name">ADMIN</span>
         </div>
-        <nav class="nav-bar">
-            <ul>
-                <li><a href="#home" class="active">Home</a></li>
-                <li><a href="openmap.php" >map</a></li>
-                <li><a href="deliverymyord.php" >myorders</a></li>
-                <li><a href="logout.php">Log out</a></li>
-                <!-- <li ><a href="../logout.php"  >Logout</a></li> -->
+
+        <div class="menu-items">
+            <ul class="nav-links">
+                <li><a href="#">
+                    <i class="uil uil-estate"></i>
+                    <span class="link-name">Dahsboard</span>
+                </a></li>
+                <!-- <li><a href="#">
+                    <i class="uil uil-files-landscapes"></i>
+                    <span class="link-name">Content</span>
+                </a></li> -->
+                <!-- <li><a href="analytics.php">
+                    <i class="uil uil-chart"></i>
+                    <span class="link-name">Analytics</span> -->
+                <!-- </a></li>
+                <li><a href="donate.php">
+                    <i class="uil uil-heart"></i>
+                    <span class="link-name">Donates</span>
+                </a></li> -->
+                <li><a href="feedback.php">
+                    <i class="uil uil-comments"></i>
+                    <span class="link-name">Feedbacks</span>
+                </a></li>
+                <li><a href="adminprofile.php">
+                    <i class="uil uil-user"></i>
+                    <span class="link-name">History</span>
+                </a></li>
+                <!-- <li><a href="#">
+                    <i class="uil uil-share"></i>
+                    <span class="link-name">Share</span>
+                </a></li> -->
             </ul>
-        </nav>
-    </header>
-    <br>
-    <script>
-        hamburger=document.querySelector(".hamburger");
-        hamburger.onclick =function(){
-            navBar=document.querySelector(".nav-bar");
-            navBar.classList.toggle("active");
-        }
-    </script>
-<?php
+            
+            <ul class="logout-mode">
+                <li><a href="../logout.php">
+                    <i class="uil uil-signout"></i>
+                    <span class="link-name">Logout</span>
+                </a></li>
 
-// echo var_export(unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=103.113.190.19')));
-// echo "Your city: {$city}\n";
+                <li class="mode">
+                    <a href="#">
+                        <i class="uil uil-moon"></i>
+                    <span class="link-name">Dark Mode</span>
+                </a>
 
-// $city = "<script language=javascript> document.write(geoplugin_city());</script>"; 
-// $scity=$city;
-?>
-    <style>
-        .itm{
-            background-color: white;
-            display: grid;
-        }
-        .itm img{
-            width: 400px;
-            height: 400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        p{
-            text-align: center; font-size: 30PX;color: black; margin-top: 50px;
-        }
-        a{
-            /* text-decoration: underline; */
-        }
-        @media (max-width: 767px) {
-            .itm{
-                /* float: left; */
-                
-            }
-            .itm img{
-                width: 350px;
-                height: 350px;
-            }
-        }
-    </style>
-         <h2><center>Welcome <?php echo"$name";?></center></h2>
-
-        <div class="itm" >
-
-            <img src="../img/delivery.gif" alt="" width="400" height="400"> 
-          
+                <div class="mode-toggle">
+                  <span class="switch"></span>
+                </div>
+            </li>
+            </ul>
         </div>
-        <!-- <h2><center>your Location : <?php echo"$city" ?></center></h2> -->
-        <div class="get">
+    </nav>
+
+    <section class="dashboard">
+        
+        <div class="top">
+            <i class="uil uil-bars sidebar-toggle"></i>
+            <!-- <p>Food Donate</p> -->
+            <p  class ="logo" ><b style="color: #06C167; ">SustainBite</b></p>
+             <p class="user"></p>
+            <!-- <div class="search-box">
+                <i class="uil uil-search"></i>
+                <input type="text" placeholder="Search here...">
+            </div> -->
+            
+            <!--<img src="images/profile.jpg" alt="">-->
+        </div>
+
+        <div class="dash-content">
+            <div class="overview">
+                <div class="title">
+                    <i class="uil uil-tachometer-fast-alt"></i>
+                    <span class="text">Dashboard</span>
+                </div>
+
+                <div class="boxes">
+                    <div class="box box1">
+                        <i class="uil uil-user"></i>
+                        <!-- <i class="fa-solid fa-user"></i> -->
+                        <span class="text">Total users</span>
+                        <?php
+                           $query="SELECT count(*) as count FROM  login";
+                           $result=mysqli_query($connection, $query);
+                           $row=mysqli_fetch_assoc($result);
+                         echo "<span class=\"number\">".$row['count']."</span>";
+                        ?>
+                        <!-- <span class="number">50,120</span> -->
+                    </div>
+                    <div class="box box2">
+                        <i class="uil uil-comments"></i>
+                        <span class="text">Feedbacks</span>
+                        <?php
+                           $query="SELECT count(*) as count FROM  user_feedback";
+                           $result=mysqli_query($connection, $query);
+                           $row=mysqli_fetch_assoc($result);
+                         echo "<span class=\"number\">".$row['count']."</span>";
+                        ?>
+                        <!-- <span class="number">20,120</span> -->
+                    </div>
+                    <div class="box box3">
+                        <i class="uil uil-heart"></i>
+                        <span class="text">Total donates</span>
+                        <?php
+                           $query="SELECT count(*) as count FROM food_donations";
+                           $result=mysqli_query($connection, $query);
+                           $row=mysqli_fetch_assoc($result);
+                         echo "<span class=\"number\">".$row['count']."</span>";
+                        ?>
+                        <!-- <span class="number">10,120</span> -->
+                    </div>
+                </div>
+            </div>
+
+           
             <?php
 
+// $loc= $_SESSION['location'];
 
-// // Define the SQL query to fetch unassigned orders
-// $sql = "SELECT fd.Fid AS Fid,fd.location as cure, fd.name,fd.phoneno,fd.date,fd.delivery_by, fd.address as From_address, 
-// ad.name AS delivery_person_name, ad.address AS To_address
-// FROM food_donations fd
-// LEFT JOIN admin ad ON fd.assigned_to = ad.Aid where assigned_to IS NOT NULL and delivery_by IS NULL";
-
-$sql = "SELECT 
-        fd.Fid AS Fid,
-        fd.location AS cure,
-        fd.name,
-        fd.phoneno,
-        fd.date,
-        fd.delivery_by,
-        fd.address AS From_address, 
-        ad.name AS delivery_person_name, 
-        ad.address AS To_address
-    FROM 
-        food_donations fd
-    LEFT JOIN 
-        admin ad 
-    ON 
-        fd.assigned_to = ad.Aid
-    WHERE 
-        assigned_to IS NOT NULL AND delivery_by IS NULL";
+// Define the SQL query to fetch unassigned orders
+// $id=$_SESSION['Aid'];
+// $_SESSION['admin_id'] = $id;
+// $sql = "SELECT * FROM food_donations WHERE (status = 'active' AND assigned_to is null) OR (status = 'active' AND assigned_to = $id) OR (status = 'canceled' AND assigned_to != $id) ORDER BY Fid Desc";
 
 // Execute the query
-$result=mysqli_query($connection, $sql);
-
+// $result=mysqli_query($connection, $sql);
 
 
 // Check for errors
@@ -152,25 +203,24 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 
 // If the delivery person has taken an order, update the assigned_to field in the database
-if (isset($_POST['food']) && isset($_POST['delivery_person_id'])) {
-    $order_id = $_POST['order_id'];
-    $delivery_person_id = $_POST['delivery_person_id'];
-    $sql = "SELECT * FROM food_donations WHERE Fid = $order_id AND delivery_by IS NOT NULL";
-    $result = mysqli_query($connection, $sql);
-
-    if (mysqli_num_rows($result) > 0) {
-        // Order has already been assigned to someone else
-        die("Sorry, this order has already been assigned to someone else.");
-    }
-
-
-    $sql = "UPDATE food_donations SET delivery_by = $delivery_person_id WHERE Fid = $order_id";
-    // $result = mysqli_query($conn, $sql);
-    $result=mysqli_query($connection, $sql);
-
-
-    if (!$result) {
-        die("Error assigning order: " . mysqli_error($conn));
+if (isset($_POST['food'])) {
+    $order_id = $_POST['order_id']; // ID of the donation
+    $admin_id = $_POST['delivery_person_id']; // Admin ID from session
+    
+    // Update query to assign the donation and set status to 'active'
+    $update_query = "UPDATE food_donations 
+                     SET status = 'active', assigned_to = $admin_id, donation_status = 'Accepted by NGO'
+                     WHERE Fid = $order_id";
+    
+    $update_result = mysqli_query($connection, $update_query);
+    
+    if ($update_result) {
+        echo "<script>alert('Food donation assigned successfully!');</script>";
+        // Reload the page to show updated data
+        header('Location: ' . $_SERVER['PHP_SELF']);
+        exit();
+    } else {
+        echo "<script>alert('Error assigning the donation.');</script>";
     }
 
     // Reload the page to prevent duplicate assignments
@@ -182,59 +232,54 @@ if (isset($_POST['food']) && isset($_POST['delivery_person_id'])) {
 
 
 ?>
-<div class="log">
-<!-- <button type="submit" name="food" onclick="">My orders</button> -->
-<a href="deliverymyord.php">My orders</a>
-
-
-</div>
-  
 
 <!-- Display the orders in an HTML table -->
-<div class="table-container">
-         <!-- <p id="heading">donated</p> -->
+<!-- <div class="table-container">
+         <p id="heading">donated</p> 
          <div class="table-wrapper">
         <table class="table">
         <thead>
         <tr>
             <th >Name</th>
-            <!-- <th>food</th> -->
-            <!-- <th>Category</th> -->
+            <th>food</th>
+            <th>Category</th>
             <th>phoneno</th>
             <th>date/time</th>
-            <th>Pickup address</th>
-            <th>Delivery Address</th>
-            <th>Action</th>
+            <th>address</th>
+            <th>Quantity</th>
+            <th>ExpiryDate</th>
+            <th>Donation Status</th>
+             <th>Action</th> 
          
           
            
         </tr>
         </thead>
-       <tbody>
+       <tbody> -->
 
         <?php foreach ($data as $row) { ?>
-        <?php    echo "<tr><td data-label=\"name\">".$row['name']."</td><td data-label=\"phoneno\">".$row['phoneno']."</td><td data-label=\"date\">".$row['date']."</td><td data-label=\"Pickup Address\">".$row['From_address']."</td><td data-label=\"Delivery Address\">".$row['To_address']."</td>";
+        <?php    
 ?>
         
             <!-- <td><?= $row['Fid'] ?></td>
             <td><?= $row['name'] ?></td>
             <td><?= $row['address'] ?></td> -->
-            <td data-label="Action" style="margin:auto">
-                <?php if ($row['delivery_by'] == null) { ?>
-
-					<form method="get" action="view_map.php">
-                       <input type="hidden" name="order_id" value="<?= $row['Fid'] ?>">
-			           <input type="hidden" name="delivery_person_id" value="<?= $id ?>">
-			           <input type="hidden" name="pickup_address" value="<?= htmlspecialchars($row['From_address']) ?>">
-                       <input type="hidden" name="delivery_address" value="<?= htmlspecialchars($row['To_address']) ?>">           
-                       <button type="submit" name="view_map">Take Order</button>
-                    </form>
+          
+                    <!-- <form method="POST" action="update_status.php">
+                        <input type="hidden" name="fid" value="<?php echo $row['fid']; ?>">
+                        <select name="donation_status">
+                            <option value="Pending" <?php if($row['donation_status'] == 'Pending') echo 'selected'; ?>>Pending</option>
+                            <option value="Assigned to NGO" <?php if($row['donation_status'] == 'Assigned to NGO') echo 'selected'; ?>>Assigned to NGO</option>
+                            <option value="Pickup Scheduled" <?php if($row['donation_status'] == 'Pickup Scheduled') echo 'selected'; ?>>Pickup Scheduled</option>
+                            <option value="Picked Up" <?php if($row['donation_status'] == 'Picked Up') echo 'selected'; ?>>Picked Up</option>
+                            <option value="Delivered to Needy" <?php if($row['donation_status'] == 'Delivered to Needy') echo 'selected'; ?>>Delivered to Needy</option>
+                        </select>
+                        <button type="submit">Update</button>
+                    </form> -->
                     
-                <?php } else if ($row['delivery_by'] == $id) { ?>
-                    Order assigned to you
-                <?php } else { ?>
-                    Order assigned to another delivery person
-                <?php } ?>
+</form>
+        </form>
+               
             </td>
         </tr>
         <?php } ?>
@@ -244,10 +289,56 @@ if (isset($_POST['food']) && isset($_POST['delivery_person_id'])) {
             </div>
 
         
-     
-        
 
-   <br>
-   <br>
+ 
+<!-- 
+                <div class="table-container">
+         <p id="heading">donated</p>
+         <div class="table-wrapper">
+        <table class="table">
+        <thead>
+        <tr>
+            <th >Name</th>
+            <th>food</th>
+            <th>Category</th>
+            <th>phoneno</th>
+            <th>date/time</th>
+            <th>address</th>
+            <th>Quantity</th>
+            <th>Status</th>
+          
+           
+        </tr>
+        </thead>
+       <tbody>
+   
+        <?php
+        $loc=$_SESSION['location'];
+        $query="select * from food_donations where location='$loc' ";
+        $result=mysqli_query($connection, $query);
+        if($result==true){
+            while($row=mysqli_fetch_assoc($result)){
+                echo "<tr><td data-label=\"name\">".$row['name']."</td><td data-label=\"food\">".$row['food']."</td><td data-label=\"category\">".$row['category']."</td><td data-label=\"phoneno\">".$row['phoneno']."</td><td data-label=\"date\">".$row['date']."</td><td data-label=\"Address\">".$row['address']."</td><td data-label=\"quantity\">".$row['quantity']."</td><td  data-label=\"Status\" >".$row['quantity']."</td></tr>";
+
+             }
+            
+          }
+          else{
+            echo "<p>No results found.</p>";
+         }
+    
+       ?> 
+    
+        </tbody>
+    </table>
+         </div>
+                </div>
+                
+          -->
+            
+        </div>
+    </section>
+
+    <script src="admin.js"></script>
 </body>
 </html>

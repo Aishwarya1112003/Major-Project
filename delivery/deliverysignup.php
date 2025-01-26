@@ -85,7 +85,7 @@ if(isset($_POST['sign']))
           </div>
           <div class="">
                            <!-- <label for="district">District:</label> -->
-                           <select id="district" name="district" style="padding:10px; padding-left: 20px;">
+                           <!-- <select id="district" name="district" style="padding:10px; padding-left: 20px;">
                           <option value="santacruz">Santacruz</option>
                           <option value="vileparle">Vileparle</option>
                           <option value="andheri">Andheri</option>
@@ -93,7 +93,7 @@ if(isset($_POST['sign']))
                           <option value="bandra">Bandra</option>
                           <option value="mahim">Mahim</option>
                           <option value="dadar">Dadar</option>
-                        </select> 
+                        </select>  -->
                         
           </div>
           <br>
